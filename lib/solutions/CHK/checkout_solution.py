@@ -47,7 +47,7 @@ PRODUCTS = {
 def checkout(skus: str) -> int:
     total = 0
     bucket = {}
-    skus = sorted(skus, reverse=True)
+    skus = sorted(skus)
     for item in skus:
         if item not in PRODUCTS:
             return -1
@@ -73,7 +73,7 @@ def checkout(skus: str) -> int:
                     if related in bucket:
                         related_cnt = bucket[related]
                         expected_to_deduct = related_cnt // cnt
-                        discount_price = -(expected_to_deduct * 45 + (related_cnt-(expected_to_deduct * cnt)))
+                        discount_price = -(expected_to_deduct * 45 + (related_cnt - (expected_to_deduct * cnt)))
                     else:
                         discount_price = 0
                     item_price = discount_price + (discount_cnt * cnt * regular)
@@ -86,9 +86,10 @@ def checkout(skus: str) -> int:
 
             if not applied_special or num:
                 total += (num * regular)
-            print(f"total: {total}")
+
         else:
             total += (num * regular)
-
+        print(f"\ntotal: {total}")
     return total
+
 
