@@ -7,7 +7,7 @@ SPECIAL_OFFER = {"A": [(3, 130), (5, 200)], "B": [(2, 45)], "E": [(2, "B")]}
 
 
 def checkout(skus: str) -> int:
-    total = 0
+    total_price = 0
     bucket = {}
     skus = sorted(skus)
     for item in skus:
@@ -16,14 +16,18 @@ def checkout(skus: str) -> int:
         num = bucket.get(item, 0) + 1
         bucket[item] = num
 
-    for item, cnt in bucket.items():
+    for item, count in bucket.items():
         if item in SPECIAL_OFFER:
             for offer in SPECIAL_OFFER[item]:
-                special_quantity, special_price = offer
-                while cnt >= special_quantity:
-                    print(f"\nspecial_price: {special_price}")
-                    total += special_price
-                    cnt -= special_quantity
-        total += cnt * PRICES[item]
+                special_quantity, special_item = offer
+                if special_item in bucket and bucket[special_item] >= count // special_quantity:
+                    # Apply the special offer
+                    free_items_count = count // special_quantity
+                    total_price += (count - free_items_count) * PRICES[item]
+                    del bucket[special_item]
+                else:
+                    total_price += count * PRICES[item]
+
+    return total_price
 
     return total
