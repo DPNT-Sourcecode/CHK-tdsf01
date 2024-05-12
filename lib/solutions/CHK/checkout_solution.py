@@ -72,8 +72,10 @@ def checkout(skus: str) -> int:
                     related_price = PRODUCTS[related]["regular"]
                     if related in bucket:
                         related_cnt = bucket[related]
+                        print(f"related_cnt: {related_cnt}, cnt: {cnt}")
                         expected_to_deduct = related_cnt // cnt
-                        discount_price = -(expected_to_deduct * 45 + (related_cnt - (expected_to_deduct * cnt)))
+                        discount_price = -(expected_to_deduct * 30 + (related_cnt - (expected_to_deduct * cnt)))
+                        print(f"discount_price: {discount_price}")
                     else:
                         discount_price = 0
                     item_price = discount_price + (discount_cnt * cnt * regular)
@@ -91,5 +93,6 @@ def checkout(skus: str) -> int:
             total += (num * regular)
         print(f"\ntotal: {total}")
     return total
+
 
 
