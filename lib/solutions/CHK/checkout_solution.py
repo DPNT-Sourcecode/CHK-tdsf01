@@ -77,7 +77,6 @@ def checkout(skus: str) -> int:
                 total += (num * regular)
         else:
             total += (num * regular)
+
+        print(f"\ntotal: {total}")
     return total
-
-
-
