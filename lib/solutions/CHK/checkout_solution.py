@@ -33,6 +33,7 @@ def checkout(skus: str) -> int:
         if special:
             cnt = special["cnt"]
             price = special["price"]
-            if item > cnt:
-                discount_cnt = item // cnt
-                total += discount_cnt *
+            if num > cnt:
+                discount_cnt = num // cnt
+                item_price = (discount_cnt * price) + (num - discount_cnt)
+                total += (discount_cnt * price)
