@@ -18,10 +18,12 @@ PRODUCTS = {
     },
     "B": {
         "regular": 30,
-        "specials": {
-            "cnt": 2,
-            "price": 45
-        }
+        "specials": [
+            {
+                "cnt": 2,
+                "price": 45
+            }
+        ]
     },
     "C": {
         "regular": 20
@@ -54,10 +56,11 @@ def checkout(skus: str) -> int:
         specials = PRODUCTS.get(item, {}).get("specials")
         regular = PRODUCTS.get(item, {}).get("regular")
         if specials:
-            for special_offer in specials:
-                print(f"\nspecial_offer: {special_offer}")
+            for special_offer in specials[::-1]:
                 related = special_offer.get("related")
                 cnt = special_offer["cnt"]
+                if cnt > num:
+                    continue
                 price = special_offer["price"]
                 discount_cnt = num // cnt
 
@@ -70,5 +73,7 @@ def checkout(skus: str) -> int:
                 total += item_price
         else:
             total += (num * regular)
+        print(f"\ntotal: {total}")
     return total
+
 
