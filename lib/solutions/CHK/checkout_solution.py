@@ -53,6 +53,7 @@ def checkout(skus: str) -> int:
             return -1
         num = bucket.get(item, 0) + 1
         bucket[item] = num
+
     for item, num in bucket.items():
         specials = PRODUCTS.get(item, {}).get("specials")
         regular = PRODUCTS.get(item, {}).get("regular")
@@ -68,9 +69,14 @@ def checkout(skus: str) -> int:
                 price = special_offer["price"]
                 discount_cnt = num // cnt
                 if related:
+                    related_price = PRODUCTS[related]["regular"]
                     if related in bucket:
-                        bucket[related] -= discount_cnt
-                    item_price = (discount_cnt * cnt * regular)
+                        related_cnt = bucket[related]
+                        expected_to_deduct = related_cnt // cnt
+                        discount_price = -(expected_to_deduct * 45 + (related_cnt-(expected_to_deduct * cnt)))
+                    else:
+                        discount_price = 0
+                    item_price = discount_price + (discount_cnt * cnt * regular)
 
 
                 else:
@@ -80,7 +86,9 @@ def checkout(skus: str) -> int:
 
             if not applied_special or num:
                 total += (num * regular)
+            print(f"total: {total}")
         else:
             total += (num * regular)
 
     return total
+
