@@ -39,6 +39,3 @@ def checkout(skus: str) -> int:
         else:
             total += (num * regular)
     return total
-
-
-
