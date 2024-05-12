@@ -1,7 +1,12 @@
-from lib.solutions.SUM import sum_solution
+from lib.solutions.HLO.hello_solution import hello
 
 
-class TestSum():
-    def test_sum(self):
-        assert sum_solution.compute(1, 2) == 3
+def test_hello():
+    name = "francis"
+    expected = f"hello {name}"
+
+    actual = hello(name)
+
+    assert actual == expected
+
 
