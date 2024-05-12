@@ -7,8 +7,8 @@ from lib.solutions.CHK.checkout_solution import checkout
     # ("AAABBCDE", 250),
     # ("AAAAAAAA", 330),
     # ("AAAAAAAAA", 380),
-    ("AAAAAAAAAA", 400),
-    # ("EEEB", 120),
+    # ("AAAAAAAAAA", 400),
+    ("EEEB", 120),
     # ("EEEEBB", 160),
     # ("EE", 80),
     # ("AAABBCDEE", 260),
@@ -23,6 +23,7 @@ def test_checkout_success(bucket, expected):
     actual = checkout(bucket)
 
     assert actual == expected
+
 
 
 
