@@ -8,4 +8,3 @@ def test_hello():
     actual = hello("francis")
 
     assert actual == expected
-
