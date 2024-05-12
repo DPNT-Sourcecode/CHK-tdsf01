@@ -47,12 +47,12 @@ PRODUCTS = {
 def checkout(skus: str) -> int:
     total = 0
     bucket = {}
+    skus = sorted(skus)
     for item in skus:
         if item not in PRODUCTS:
             return -1
         num = bucket.get(item, 0) + 1
         bucket[item] = num
-    print(bucket)
     for item, num in bucket.items():
         specials = PRODUCTS.get(item, {}).get("specials")
         regular = PRODUCTS.get(item, {}).get("regular")
@@ -68,12 +68,13 @@ def checkout(skus: str) -> int:
                 price = special_offer["price"]
                 discount_cnt = num // cnt
                 if related:
-
+                    print("trigger related")
                     related_price = PRODUCTS[related]["regular"]
                     discount_price = -(discount_cnt * related_price) if related in bucket else 0
-
                     item_price = discount_price + (num * regular)
+                    print(f"total n: {total}")
                 else:
+
                     item_price = (discount_cnt * price)
 
                 total += item_price
@@ -86,3 +87,4 @@ def checkout(skus: str) -> int:
             total += (num * regular)
 
     return total
+
