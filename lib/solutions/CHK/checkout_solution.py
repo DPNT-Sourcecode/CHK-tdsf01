@@ -68,9 +68,9 @@ def checkout(skus: str) -> int:
                 price = special_offer["price"]
                 discount_cnt = num // cnt
                 if related:
-
                     related_price = PRODUCTS[related]["regular"]
                     discount_price = -(discount_cnt * related_price) if related in bucket else 0
+                    bucket[related] =  bucket[related] -1
                     item_price = discount_price + (cnt * regular)
 
                 else:
@@ -84,6 +84,7 @@ def checkout(skus: str) -> int:
             total += (num * regular)
 
     return total
+
 
 
 
