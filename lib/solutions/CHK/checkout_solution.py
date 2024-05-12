@@ -71,6 +71,7 @@ def checkout(skus: str) -> int:
                     related_price = PRODUCTS[related]["regular"]
                     item_price = -(discount_cnt * related_price) + ((num % cnt) * regular) + (num * regular)
                 else:
+                    print(f"discount_cnt: {discount_cnt}, (num % cnt): {(num % cnt)}")
                     item_price = (discount_cnt * price) + ((num % cnt) * regular)
 
                 total += item_price
@@ -79,8 +80,9 @@ def checkout(skus: str) -> int:
                 total += (num * regular)
         else:
             total += (num * regular)
-
+        print(f"\ntotal: {total}")
     return total
+
 
 
 
