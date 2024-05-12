@@ -75,13 +75,15 @@ def checkout(skus: str) -> int:
                     item_price = (discount_cnt * price) + ((num % cnt) * regular)
 
                 total += item_price
-                break
+                num -= cnt
+                print(f"\ntotal: {total}")
             if not applied_special:
                 total += (num * regular)
         else:
             total += (num * regular)
-        print(f"\ntotal: {total}")
+
     return total
+
 
 
 
