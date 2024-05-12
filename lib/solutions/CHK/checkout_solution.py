@@ -81,7 +81,9 @@ def checkout(skus: str) -> int:
                 else:
                     item_price = (discount_cnt * price)
                 total += item_price
+                print(f"num before: {num}")
                 num -= (discount_cnt * cnt)
+                print(f"num after: {num}")
 
             if not applied_special or num:
                 total += (num * regular)
@@ -90,6 +92,7 @@ def checkout(skus: str) -> int:
             total += (num * regular)
 
     return total
+
 
 
 
