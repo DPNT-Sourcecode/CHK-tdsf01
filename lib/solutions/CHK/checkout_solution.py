@@ -3,7 +3,7 @@
 
 
 PRICES = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
-SPECIAL_OFFER = {"A": [(3, 130), (5, 200)], "B": [(2, 45)], "E": [2, "B"]}
+SPECIAL_OFFER = {"A": [(3, 130), (5, 200)], "B": [(2, 45)], "E": [(2, "B")]}
 
 
 def checkout(skus: str) -> int:
@@ -21,11 +21,13 @@ def checkout(skus: str) -> int:
             for offer in SPECIAL_OFFER[item]:
                 special_quantity, special_price = offer
                 while cnt >= special_quantity:
+                    print(f"\nspecial_price: {special_price}")
                     total += special_price
                     cnt -= special_quantity
         total += cnt * PRICES[item]
 
     return total
+
 
 
 
