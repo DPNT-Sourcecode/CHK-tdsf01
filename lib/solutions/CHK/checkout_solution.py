@@ -77,13 +77,16 @@ def checkout(skus: str) -> int:
 
                 total += item_price
                 num -= cnt
+                print(f"total: {total}")
 
             if not applied_special or num:
                 total += (num * regular)
+
         else:
             total += (num * regular)
 
     return total
+
 
 
 
