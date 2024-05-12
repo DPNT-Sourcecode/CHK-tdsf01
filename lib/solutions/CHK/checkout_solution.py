@@ -69,20 +69,22 @@ def checkout(skus: str) -> int:
 
                 if related:
                     related_price = PRODUCTS[related]["regular"]
-                    item_price = -(discount_cnt * related_price) + ((num % cnt) * regular) + (num * regular)
+                    discount_price = -(discount_cnt * related_price) if related in bucket else 0
+
+                    item_price = discount_price + (num * regular)
                 else:
-                    print(f"discount_cnt: {discount_cnt}, (num % cnt): {(num % cnt)}")
-                    item_price = (discount_cnt * price) + ((num % cnt) * regular)
+                    item_price = (discount_cnt * price)
 
                 total += item_price
                 num -= cnt
-                print(f"\ntotal: {total}")
-            if not applied_special:
+
+            if not applied_special or num:
                 total += (num * regular)
         else:
             total += (num * regular)
 
     return total
+
 
 
 
