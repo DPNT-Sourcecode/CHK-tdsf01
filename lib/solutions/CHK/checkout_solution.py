@@ -30,15 +30,16 @@ def checkout(skus: str) -> int:
     for item, num in bucket.items():
         special = PRODUCTS.get(item, {}).get("special")
         regular = PRODUCTS.get(item, {}).get("regular")
-        print(f"special, {special}")
         if special:
             cnt = special["cnt"]
             price = special["price"]
-            if num > cnt:
+            if num >= cnt:
                 discount_cnt = num // cnt
                 item_price = (discount_cnt * price) + ((num % cnt) * regular)
-                print(f"itme_price: {item_price}")
                 total += item_price
+        else:
+            total += (num * regular)
 
     return total
+
 
