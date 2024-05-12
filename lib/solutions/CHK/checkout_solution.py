@@ -19,15 +19,14 @@ def checkout(skus: str) -> int:
     for item, count in bucket.items():
         if item in SPECIAL_OFFER:
             for offer in SPECIAL_OFFER[item]:
-                special_quantity, special_item = offer
-                if special_item in bucket and bucket[special_item] >= count // special_quantity:
-                    # Apply the special offer
-                    free_items_count = count // special_quantity
-                    total_price += (count - free_items_count) * PRICES[item]
-                    del bucket[special_item]
-                else:
-                    total_price += count * PRICES[item]
+                special_quantity, special_price = offer
+                if isinstance(special_price, str):
+                    # Handle special case for item E
+                    b_count = bucket.get(special_price, 0)
+                    free_b_count = min(count // special_quantity, b_count)
+                    count -= free_b_count * special_quantity
+                    bucket[special_price] -= free_b_count
 
+        total_price += count * PRICES[item]
+        print(f"\n total price: {total_price}")
     return total_price
-
-    return total
