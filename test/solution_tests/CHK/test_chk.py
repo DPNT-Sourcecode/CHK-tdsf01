@@ -1,10 +1,16 @@
+import pytest
+
 from lib.solutions.CHK.checkout_solution import checkout
 
 
-def test_checkout_success():
-    bucket = "AAABBCD"
+@pytest.mark.parametrize("bucket, expected", [
+    ("AAABBCD", 210),
+    ("aBCD", -1),
+    ("ABBCD", 130)
+])
+def test_checkout_success(bucket, expected):
 
     actual = checkout(bucket)
-    expected = 210
 
     assert actual == expected
+
