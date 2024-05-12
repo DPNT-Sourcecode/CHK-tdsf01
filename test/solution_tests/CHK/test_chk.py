@@ -22,5 +22,3 @@ def test_checkout_success(bucket, expected):
     actual = checkout(bucket)
 
     assert actual == expected
-
-

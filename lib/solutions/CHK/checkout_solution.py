@@ -27,7 +27,3 @@ def checkout(skus: str) -> int:
         total += cnt * PRICES[item]
 
     return total
-
-
-
-
