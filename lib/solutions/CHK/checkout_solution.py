@@ -59,7 +59,6 @@ def checkout(skus: str) -> int:
         if specials:
             applied_special = False
             for special_offer in specials[::-1]:
-                print(special_offer)
                 related = special_offer.get("related")
                 cnt = special_offer["cnt"]
                 if cnt > num:
@@ -75,12 +74,13 @@ def checkout(skus: str) -> int:
                     item_price = (discount_cnt * price) + ((num % cnt) * regular)
 
                 total += item_price
+                break
             if not applied_special:
                 total += (num * regular)
         else:
             total += (num * regular)
 
-        print(f"\ntotal: {total}")
     return total
+
 
 
